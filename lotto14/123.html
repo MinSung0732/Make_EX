@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미로 찾기 게임</title>
+  <style>
+    body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    #maze { display: grid; grid-template-columns: repeat(5, 50px); grid-gap: 5px; }
+    .cell { width: 50px; height: 50px; background-color: #eee; border: 1px solid #ddd; text-align: center; line-height: 50px; }
+    .start, .end { background-color: #aaffaa; }
+    .path { background-color: #aafafa; }
+  </style>
+</head>
+<body>
+
+  <div id="maze"></div>
+  <button onclick="solveMaze()">Solve Maze</button>
+
+  <script>
+    const m = 5, z = document.getElementById('maze');
+    const mZ = () => Math.random() < 0.2 ? 'path' : '';
+    const maze = Array.from({ length: m }, () => Array.from({ length: m }, () => {
+      const c = document.createElement('div');
+      c.classList.add('cell', mZ());
+      z.appendChild(c);
+      return c;
+    }));
+    const [s, e] = [maze[0][0], maze[m - 1][m - 1]];
+    [s.classList, e.classList].forEach(cL => cL.add('start', 'end'));
+
+    const getN = (m, c) => {
+      const [rI, cI] = [m.findIndex(row => row.includes(c)), m[rI].indexOf(c)];
+      const n = [];
+      if (rI > 0) n.push(m[rI - 1][cI]); // Up
+      if (rI < m - 1) n.push(m[rI + 1][cI]); // Down
+      if (cI > 0) n.push(m[rI][cI - 1]); // Left
+      if (cI < m - 1) n.push(m[rI][cI + 1]); // Right
+      return n;
+    };
+
+    const solveMaze = () => {
+      const v = new Set(), p = [], s = [start];
+      while (s.length > 0) {
+        const c = s.pop();
+        if (c === end) return p;
+        if (!v.has(c)) {
+          v.add(c);
+          p.push(c);
+          s.push(...getN(maze, c).filter(n => !v.has(n)));
+        }
+      }
+      return null;
+    };
+
+    const displayPath = p => {
+      p.forEach(cell => cell.classList.add('path'));
+      alert(p ? '미로를 찾았습니다!' : '미로를 찾을 수 없습니다ㅠㅠ');
+    };
+  </script>
+</body>
+</html>

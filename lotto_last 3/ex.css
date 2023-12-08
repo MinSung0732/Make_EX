@@ -1,0 +1,50 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: lightpink;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#main {
+    width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#main2 {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+input[type="button"] {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.matched {
+    color: #ff4081;
+    font-weight: bold;
+}
+
+#lottoImg {
+    width: 100px;
+    margin-top: 10px;
+}
